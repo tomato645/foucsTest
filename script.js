@@ -34,19 +34,16 @@ function getDate(){
     return date.getFullYear() + '' + ('0' + (date.getMonth() + 1)).slice(-2) + '' +('0' + date.getDate()).slice(-2) + '' +  ('0' + date.getHours()).slice(-2) + '' + ('0' + date.getMinutes()).slice(-2) + '' + ('0' + date.getSeconds()).slice(-2) + '' + date.getMilliseconds()
 }
 
-window.onload = async function(){
-    while (true){
-        await changeBackgroudColor();
-    }
+window.onload = function() {
+    let startStopBtn = document.querySelector("#start-stop-btn");
+    startStopBtn.addEventListener("click", async function() {
+        console.log("toggle");
+        for (let i = 0; i < 10; i++) {
+            if (startStopBtn.checked === false){
+                console.log("break");
+                break
+            }
+            await changeBackgroudColor();
+        }
+    })
 }
-
-// document.getElementById("stop").onchange = async function(){
-//     console.log(this.checked)
-//     if (this.checked){
-//         while (true){
-//             await changeBackgroudColor();
-//         }
-//     }else{
-//         console.log("stop....")
-//     }
-// }
