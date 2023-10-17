@@ -81,6 +81,7 @@ function showChart() {
         }
     }
     )
+    chart.canvas.parentNode.style.width = "90%";
 }
 
 window.onload = function () {
