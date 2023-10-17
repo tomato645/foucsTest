@@ -51,7 +51,41 @@ function getTime() {
     return d.getTime();
 }
 
+function showChart() {
+    let json_score = JSON.parse(localStorage.getItem("score"));
+    if (json_score == null) {
+        return
+    }
+
+    let labels = [];
+    let data = [];
+
+    json_score.forEach(element => {
+        labels.push(new Date(element.timestamp).toLocaleTimeString());
+        data.push(element.score);
+    });
+
+    let ctx = document.getElementById("chart");
+    let chart = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: "reaction speed",
+                    data: data,
+                    borderColor: "rgba(255,0,0,1)",
+                    backgroundColor: "rgba(0,0,0,0)"
+                }
+            ]
+        }
+    }
+    )
+}
+
 window.onload = function () {
+    showChart();
+
     let startStopBtn = document.querySelector("#start-stop-btn");
     startStopBtn.addEventListener("click", async function () {
         console.log("toggle");
@@ -61,6 +95,7 @@ window.onload = function () {
                 break
             }
             await changeBackgroudColor();
+            showChart();
         }
     })
 }
