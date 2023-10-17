@@ -4,21 +4,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>test</title>
 </head>
 <style>
-    #click_space{
+    #click_space {
         width: 100vh;
         height: 100vh;
     }
+
+    .control-area {
+        height: 100px;
+        display: block;
+    }
+
+    #start-stop-btn {
+        width: 20px;
+        height: 20px;
+        margin-right: 20px;
+    }
 </style>
+
 <body>
-    <div>
-        <h1>click test</h1>
-        <input type="checkbox" name="stop" id="stop" checked>
+    <h1>click test</h1>
+
+    <div class="control-area">
+        <input type="checkbox" name="start-stop" id="start-stop-btn">
         <button id="storageClear" onclick="localStorage.clear()">clear data</button>
-        <h2 id="time"></h2>
     </div>
+
+    <h2 id="time"></h2>
+
     <div id="click_space"></div>
     <script src="script.js"></script>
 </body>
