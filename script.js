@@ -12,9 +12,23 @@ async function changeBackgroudColor() {
     let clickedTime = await clickWaiter();
 
     let time = clickedTime - changedTime;
-    localStorage.setItem(getDate(), time);
+    saveTime(time);
+
     document.getElementById("time").innerHTML = `${time} ms`;
     console.log(`time: ${time} ms`);
+}
+
+function saveTime(time) {
+    console.log("saving time!!!");
+
+    let data = { timestamp: getTime(), score: time };
+    let prevData = JSON.parse(localStorage.getItem("score"));
+    if (prevData == null) {
+        localStorage.setItem("score", JSON.stringify([data]));
+    } else {
+        prevData.push(data);
+        localStorage.setItem("score", JSON.stringify(prevData));
+    }
 }
 
 let clickWaiter = () => new Promise((resolve) => document.getElementById("click_space").onclick = function () {
@@ -32,9 +46,9 @@ function random(min, max) {
     return Math.floor(Math.random() * (max + 1 - min)) + min;
 }
 
-function getDate() {
-    let date = new Date();
-    return date.getFullYear() + '' + ('0' + (date.getMonth() + 1)).slice(-2) + '' + ('0' + date.getDate()).slice(-2) + '' + ('0' + date.getHours()).slice(-2) + '' + ('0' + date.getMinutes()).slice(-2) + '' + ('0' + date.getSeconds()).slice(-2) + '' + date.getMilliseconds()
+function getTime() {
+    let d = new Date();
+    return d.getTime();
 }
 
 window.onload = function () {
