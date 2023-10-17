@@ -2,6 +2,9 @@ async function changeBackgroudColor() {
     let randomNum = random(1000, 5000);
     console.log(`waiting ${randomNum} ms...`)
     await sleep(randomNum);
+    if (!document.getElementById("start-stop-btn").checked){
+        return
+    }
     console.log("change color");
     document.getElementById("click_space").style.backgroundColor = "red";
     let changedTime = performance.now();
