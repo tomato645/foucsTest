@@ -10,44 +10,57 @@
     <title>test</title>
 </head>
 <style>
-    #click_space {
-        width: 100vh;
-        height: 100vh;
-    }
-
-    .control-area {
-        height: 100px;
-        display: block;
-    }
-
-    #start-stop-btn {
-        width: 20px;
-        height: 20px;
-        margin-right: 20px;
-    }
-
     body {
         overflow: hidden;
     }
 
+    .app {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .control-area {
+        height: 10%;
+        display: block;
+    }
+
+    #start-stop-btn, #storageClear {
+        box-sizing: border-box;
+        width: 10%;
+        height: 100%;
+        margin: 0px 20px 0px 20px;
+    }
+
+    #time {
+        font-size: 25px;
+        display: inline;
+        margin: 0px 20px 0px 20px;
+    }
+
     #click_space {
-        height: 50vh;
+        margin: 10px;
+        height: 40%;
     }
 </style>
 
 <body>
-    <h1>click test</h1>
+    <div class="app">
+        <h1>click test</h1>
 
-    <div class="control-area">
-        <input type="checkbox" name="start-stop" id="start-stop-btn">
-        <button id="storageClear" onclick="localStorage.clear()">clear data</button>
+        <div class="control-area">
+            <input type="checkbox" name="start-stop" id="start-stop-btn">
+            <input type="checkbox" id="storageClear" onclick="localStorage.clear()"></input>
+            <h2 id="time">000ms</h2>
+        </div>
+
+
+        <div id="click_space"></div>
+
+        <div class="chart-continer">
+            <canvas id="chart"></canvas>
+        </div>
+
     </div>
-
-    <h2 id="time"></h2>
-
-    <div id="click_space"></div>
-
-    <canvas id="chart"></canvas>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
     <script src="script.js"></script>
