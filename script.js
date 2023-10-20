@@ -12,10 +12,17 @@ async function changeBackgroudColor() {
     let clickedTime = await clickWaiter();
 
     let time = clickedTime - changedTime;
+    showTime(time);
     saveTime(time);
+}
 
-    document.getElementById("time").innerHTML = `${time} ms`;
-    console.log(`time: ${time} ms`);
+function showTime(time) {
+    let pastTime = JSON.parse(localStorage.getItem("score")).slice(-1)[0].score;
+    let diffTime = time - pastTime;
+    let diffTimeText = diffTime >= 0 ? `+${diffTime}` : `${diffTime}`;
+    let text = `${time}ms (${diffTimeText}ms)`
+    document.getElementById("time").innerHTML =text;
+    console.log(`time: ${text}`);
 }
 
 function saveTime(time) {
