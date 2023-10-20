@@ -11,14 +11,14 @@ async function changeBackgroudColor() {
 
     let clickedTime = await clickWaiter();
 
-    let time = clickedTime - changedTime;
-    showTime(time);
-    saveTime(time);
+    let score = clickedTime - changedTime;
+    showTime(score);
+    saveTime(score);
 }
 
-function showTime(time) {
+function showTime(score) {
     let pastTime = JSON.parse(localStorage.getItem("score")).slice(-1)[0].score;
-    let diffTime = time - pastTime;
+    let diffTime = score - pastTime;
     let diffTimeText = diffTime >= 0 ? `+${diffTime}` : `${diffTime}`;
     let text = `${time}ms (${diffTimeText}ms)`
     document.getElementById("time").innerHTML =text;
@@ -26,8 +26,6 @@ function showTime(time) {
 }
 
 function saveTime(time) {
-    console.log("saving time!!!");
-
     let data = { timestamp: getTime(), score: time };
     let prevData = JSON.parse(localStorage.getItem("score"));
     if (prevData == null) {
@@ -58,7 +56,7 @@ function getTime() {
     return d.getTime();
 }
 
-function showChart() {
+function refreshChart() {
     let json_score = JSON.parse(localStorage.getItem("score"));
     if (json_score == null) {
         return
@@ -92,7 +90,7 @@ function showChart() {
 }
 
 window.onload = function () {
-    showChart();
+    refreshChart();
 
     let startStopBtn = document.querySelector("#start-stop-btn");
     startStopBtn.addEventListener("click", async function () {
@@ -104,7 +102,7 @@ window.onload = function () {
                 break
             }
             await changeBackgroudColor();
-            showChart();
+            refreshChart();
         }
     })
 }
