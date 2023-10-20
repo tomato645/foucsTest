@@ -11,16 +11,28 @@ async function changeBackgroudColor() {
 
     let clickedTime = await clickWaiter();
 
-    let time = clickedTime - changedTime;
-    saveTime(time);
+    let score = clickedTime - changedTime;
+    showTime(score);
+    saveTime(score);
+}
 
-    document.getElementById("time").innerHTML = `${time} ms`;
-    console.log(`time: ${time} ms`);
+function showTime(time) {
+    const pastTime = JSON.parse(localStorage.getItem("score"));
+    if (pastTime == null) {
+        let text = `${time}ms`;
+        document.getElementById("time").innerHTML =text;
+        console.log(`time: ${text}`);
+    } else {
+        let lastTime = pastTime[pastTime.length - 1].score;
+        let diffTime = time - lastTime;
+        let diffTimeText = diffTime >= 0 ? `+${diffTime}` : `${diffTime}`;
+        let text = `${time}ms (${diffTimeText}ms)`;
+        document.getElementById("time").innerHTML =text;
+        console.log(`time: ${text}`);
+    }
 }
 
 function saveTime(time) {
-    console.log("saving time!!!");
-
     let data = { timestamp: getTime(), score: time };
     let prevData = JSON.parse(localStorage.getItem("score"));
     if (prevData == null) {
@@ -51,7 +63,7 @@ function getTime() {
     return d.getTime();
 }
 
-function showChart() {
+function refreshChart() {
     let json_score = JSON.parse(localStorage.getItem("score"));
     if (json_score == null) {
         return
@@ -85,18 +97,19 @@ function showChart() {
 }
 
 window.onload = function () {
-    showChart();
+    refreshChart();
 
     let startStopBtn = document.querySelector("#start-stop-btn");
     startStopBtn.addEventListener("click", async function () {
         console.log("toggle");
-        for (let i = 0; i < 10; i++) {
+        // for (let i = 0; i < 10; i++) {
+        while (true) {
             if (startStopBtn.checked === false) {
                 console.log("break");
                 break
             }
             await changeBackgroudColor();
-            showChart();
+            refreshChart();
         }
     })
 }
