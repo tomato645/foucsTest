@@ -97,7 +97,8 @@ window.onload = function () {
     let startStopBtn = document.querySelector("#start-stop-btn");
     startStopBtn.addEventListener("click", async function () {
         console.log("toggle");
-        for (let i = 0; i < 10; i++) {
+        // for (let i = 0; i < 10; i++) {
+        while (true) {
             if (startStopBtn.checked === false) {
                 console.log("break");
                 break
