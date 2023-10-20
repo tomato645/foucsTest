@@ -17,12 +17,19 @@ async function changeBackgroudColor() {
 }
 
 function showTime(time) {
-    let pastTime = JSON.parse(localStorage.getItem("score")).slice(-1)[0].score;
-    let diffTime = time - pastTime;
-    let diffTimeText = diffTime >= 0 ? `+${diffTime}` : `${diffTime}`;
-    let text = `${time}ms (${diffTimeText}ms)`
-    document.getElementById("time").innerHTML =text;
-    console.log(`time: ${text}`);
+    const pastTime = JSON.parse(localStorage.getItem("score"));
+    if (pastTime == null) {
+        let text = `${time}ms`;
+        document.getElementById("time").innerHTML =text;
+        console.log(`time: ${text}`);
+    } else {
+        let lastTime = pastTime[pastTime.length - 1].score;
+        let diffTime = time - lastTime;
+        let diffTimeText = diffTime >= 0 ? `+${diffTime}` : `${diffTime}`;
+        let text = `${time}ms (${diffTimeText}ms)`;
+        document.getElementById("time").innerHTML =text;
+        console.log(`time: ${text}`);
+    }
 }
 
 function saveTime(time) {
