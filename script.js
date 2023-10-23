@@ -18,19 +18,40 @@ async function changeBackgroudColor() {
 
 function showTime(time) {
     const pastTime = JSON.parse(localStorage.getItem("score"));
+	const fact = factorization(time);
 	time = Math.round(time);
-    if (pastTime == null) {
         let text = `${time}ms`;
+    if (pastTime == null) {
+        text += ` (${fact})`;
         document.getElementById("time").innerHTML =text;
         console.log(`time: ${text}`);
     } else {
         let lastTime = pastTime[pastTime.length - 1].score;
         let diffTime = Math.round(time - lastTime);
         let diffTimeText = diffTime >= 0 ? `+${diffTime}` : `${diffTime}`;
-        let text = `${time}ms (${diffTimeText}ms)`;
+        text += ` (${fact})`;
+        text += ` (${diffTimeText}ms)`;
         document.getElementById("time").innerHTML =text;
         console.log(`time: ${text}`);
     }
+}
+
+function factorization(number) {
+	let factors = [];
+	for (let i=2; i<=number; i++) { 
+		if (number % i == 0) { 
+			number /= i;
+			factors.push(i);
+			i--;
+		}
+	}
+
+	let factorsStr = "";
+	factorsStr += factors[0];
+	for (let i=1; i<factors.length; i++) {
+		factorsStr += ` &times ${factors[i]}`;
+	}
+	return factorsStr;
 }
 
 function saveTime(time) {
