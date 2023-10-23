@@ -114,6 +114,11 @@ window.onload = function () {
     })
 }
 
+document.getElementById("storageClear").addEventListener("click", function(){
+	localStorage.clear();
+	refreshChart();
+})
+
 document.addEventListener("touchmove", function (e) {
     e.preventDefault();
 }, { passive: false });
