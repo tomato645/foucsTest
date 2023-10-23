@@ -18,13 +18,14 @@ async function changeBackgroudColor() {
 
 function showTime(time) {
     const pastTime = JSON.parse(localStorage.getItem("score"));
+	time = Math.round(time);
     if (pastTime == null) {
         let text = `${time}ms`;
         document.getElementById("time").innerHTML =text;
         console.log(`time: ${text}`);
     } else {
         let lastTime = pastTime[pastTime.length - 1].score;
-        let diffTime = time - lastTime;
+        let diffTime = Math.round(time - lastTime);
         let diffTimeText = diffTime >= 0 ? `+${diffTime}` : `${diffTime}`;
         let text = `${time}ms (${diffTimeText}ms)`;
         document.getElementById("time").innerHTML =text;
