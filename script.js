@@ -17,9 +17,10 @@ async function changeBackgroudColor() {
 }
 
 function showTime(time) {
+    time = Math.round(time);
     const pastTime = JSON.parse(localStorage.getItem("score"));
 	const fact = factorization(time);
-	time = Math.round(time);
+
         let text = `${time}ms`;
     if (pastTime == null) {
         text += ` (${fact})`;
