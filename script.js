@@ -1,3 +1,7 @@
+function getMillisecond() {
+    return Math.round(performance.now());
+}
+
 async function changeBackgroudColor() {
     let randomNum = random(1000, 5000);
     console.log(`waiting ${randomNum} ms...`)
@@ -7,7 +11,7 @@ async function changeBackgroudColor() {
     }
     console.log("change color");
     document.getElementById("click_space").style.backgroundColor = "red";
-    let changedTime = performance.now();
+    let changedTime = getMillisecond();
 
     let clickedTime = await clickWaiter();
 
@@ -19,15 +23,15 @@ async function changeBackgroudColor() {
 function showTime(time) {
     const pastTime = JSON.parse(localStorage.getItem("score"));
 	const fact = factorization(time);
-	time = Math.round(time);
+
         let text = `${time}ms`;
     if (pastTime == null) {
         text += ` (${fact})`;
         document.getElementById("time").innerHTML =text;
         console.log(`time: ${text}`);
     } else {
-        let lastTime = pastTime[pastTime.length - 1].score;
-        let diffTime = Math.round(time - lastTime);
+        let lastTime = Math.round(pastTime[pastTime.length - 1].score);
+        let diffTime = time - lastTime;
         let diffTimeText = diffTime >= 0 ? `+${diffTime}` : `${diffTime}`;
         text += ` (${fact})`;
         text += ` (${diffTimeText}ms)`;
@@ -68,7 +72,7 @@ function saveTime(time) {
 let clickWaiter = () => new Promise((resolve) => document.getElementById("click_space").onclick = function () {
     console.log("clicked");
     document.getElementById("click_space").style.backgroundColor = "white";
-    let clickedTime = performance.now();
+    let clickedTime = getMillisecond();
     resolve(clickedTime);
 })
 
