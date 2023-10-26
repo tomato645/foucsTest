@@ -50,12 +50,9 @@ function factorization(number) {
 		}
 	}
 
-	let factorsStr = "";
-	factorsStr += factors[0];
-	for (let i=1; i<factors.length; i++) {
-		factorsStr += ` &times ${factors[i]}`;
-	}
-	return factorsStr;
+    let factorsStr = factors.join(" &times ");
+    console.warn(`factorsStr = ${factorsStr}`);
+	return factorsStr
 }
 
 function saveTime(time) {
