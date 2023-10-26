@@ -22,12 +22,12 @@ async function changeBackgroudColor() {
 
 function showTime(time) {
     const pastTime = JSON.parse(localStorage.getItem("score"));
-	const fact = factorization(time);
+    const fact = factorization(time);
 
-        let text = `${time}ms`;
+    let text = `${time}ms`;
     if (pastTime == null) {
         text += ` (${fact})`;
-        document.getElementById("time").innerHTML =text;
+        document.getElementById("time").innerHTML = text;
         console.log(`time: ${text}`);
     } else {
         let lastTime = Math.round(pastTime[pastTime.length - 1].score);
@@ -35,24 +35,24 @@ function showTime(time) {
         let diffTimeText = diffTime >= 0 ? `+${diffTime}` : `${diffTime}`;
         text += ` (${fact})`;
         text += ` (${diffTimeText}ms)`;
-        document.getElementById("time").innerHTML =text;
+        document.getElementById("time").innerHTML = text;
         console.log(`time: ${text}`);
     }
 }
 
 function factorization(number) {
-	let factors = [];
-	for (let i=2; i<=number; i++) { 
-		if (number % i == 0) { 
-			number /= i;
-			factors.push(i);
-			i--;
-		}
-	}
+    let factors = [];
+    for (let i = 2; i <= number; i++) {
+        if (number % i == 0) {
+            number /= i;
+            factors.push(i);
+            i--;
+        }
+    }
 
     let factorsStr = factors.join(" &times ");
     console.warn(`factorsStr = ${factorsStr}`);
-	return factorsStr
+    return factorsStr
 }
 
 function saveTime(time) {
@@ -137,9 +137,9 @@ window.onload = function () {
     })
 }
 
-document.getElementById("storageClear").addEventListener("click", function(){
-	localStorage.clear();
-	refreshChart();
+document.getElementById("storageClear").addEventListener("click", function () {
+    localStorage.clear();
+    refreshChart();
 })
 
 document.addEventListener("touchmove", function (e) {
